@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hey Beautiful</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Poppins', sans-serif; background: #000; color: #fff; min-height: 100vh; overflow: hidden; }
+
+  /* SCREENS */
+  .screen { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px 24px; opacity: 0; pointer-events: none; transition: opacity 0.8s ease; }
+  .screen.active { opacity: 1; pointer-events: all; }
+
+  /* SCREEN 1 */
+  #s1 { background: radial-gradient(ellipse at bottom, #3a0a1e 0%, #000 70%); }
+  .britney-title { text-align:center; margin-bottom: 28px; line-height:1.1; }
+  .for-text { display:block; font-size:14px; letter-spacing:5px; text-transform:uppercase; color:rgba(255,180,210,0.8); font-weight:300; margin-bottom:4px; }
+  .britney-name { display:inline-block; font-family:'Dancing Script',cursive; font-size:62px; font-weight:700; background: linear-gradient(135deg, #ff4d8f, #ff85b3, #ffb3cc, #ff4d8f); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation: shine 2.5s linear infinite; filter:drop-shadow(0 0 12px rgba(255,77,143,0.6)); }
+  @keyframes shine { 0%{background-position:0%}100%{background-position:200%} }
+  .doll-circle { width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle, #4a0a2a 60%, #2a0010 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 32px; box-shadow: 0 0 40px rgba(180,30,80,0.3); position:relative; }
+  .wave-hand { position:absolute; font-size:32px; bottom:18px; right:-10px; animation: waveHand 0.7s ease-in-out infinite; transform-origin: bottom center; display:inline-block; }
+  @keyframes waveHand { 0%,100%{transform:rotate(-20deg)}50%{transform:rotate(20deg)} }
+  .doll { font-size: 80px; animation: sealWave 2s ease-in-out infinite; transform-origin: bottom center; display: inline-block; }
+  @keyframes sealWave { 0%{transform:rotate(-18deg) translateY(4px)} 25%{transform:rotate(0deg) translateY(0px)} 50%{transform:rotate(18deg) translateY(4px)} 75%{transform:rotate(0deg) translateY(0px)} 100%{transform:rotate(-18deg) translateY(4px)} }
+  .hey { font-family: 'Dancing Script', cursive; font-size: 48px; color: #ff4d8f; margin-bottom: 14px; opacity: 0; animation: fadeUp 1.4s ease 1.2s forwards; text-shadow: 0 0 20px rgba(255,77,143,0.4); }
+  .cute-text { font-size: 16px; font-weight: 300; color: #ddd; margin-bottom: 36px; opacity: 0; animation: fadeUp 1.4s ease 2.4s forwards; }
+  .btn-main { background: linear-gradient(135deg, #ff4d8f, #ff1a6e); border: none; border-radius: 50px; padding: 16px 40px; color: #fff; font-size: 17px; font-family: 'Poppins', sans-serif; font-weight: 500; cursor: pointer; opacity: 0; animation: fadeUp 1.4s ease 3.6s forwards; box-shadow: 0 4px 24px rgba(255,77,143,0.4); transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-main:hover { transform: scale(1.05); box-shadow: 0 6px 30px rgba(255,77,143,0.6); }
+
+  /* SCREEN 2 */
+  #s2 { background: radial-gradient(ellipse at center, #1a0010 0%, #000 80%); }
+  .meter-card { background: rgba(40,5,25,0.95); border: 1.5px solid rgba(255,77,143,0.3); border-radius: 24px; padding: 40px 36px; width: 100%; max-width: 340px; text-align: center; box-shadow: 0 0 40px rgba(255,77,143,0.15); }
+  .meter-title { font-size: 18px; font-weight: 400; color: #fff; margin-bottom: 20px; }
+  .meter-pct { font-size: 64px; font-weight: 600; color: #ff4d8f; margin-bottom: 20px; font-family: 'Poppins', sans-serif; }
+  .bar-track { background: rgba(255,255,255,0.1); border-radius: 50px; height: 12px; overflow: hidden; margin-bottom: 20px; }
+  .bar-fill { height: 100%; border-radius: 50px; background: linear-gradient(90deg, #ff4d8f, #ff85b3); width: 0%; transition: width 0.1s linear; }
+  .meter-sub { font-size: 14px; color: #ff4d8f; min-height: 22px; }
+  .warning { font-size: 15px; font-weight: 700; margin-top: 12px; min-height: 24px; letter-spacing: 2px; opacity: 0; transition: opacity 0.5s; }
+  .warning.show { opacity: 1; animation: warnFlash 1.2s ease-in-out infinite; }
+  @keyframes warnFlash {
+    0%   { transform: scale(1);    color: #ffd700; text-shadow: 0 0 10px rgba(255,215,0,0.6); }
+    25%  { transform: scale(1.08) translateX(-5px); color: #ff4d4d; text-shadow: 0 0 16px rgba(255,77,77,0.8); }
+    50%  { transform: scale(1.12); color: #fff;    text-shadow: 0 0 20px rgba(255,255,255,0.9); }
+    75%  { transform: scale(1.08) translateX(5px);  color: #ff4d4d; text-shadow: 0 0 16px rgba(255,77,77,0.8); }
+    100% { transform: scale(1);    color: #ffd700; text-shadow: 0 0 10px rgba(255,215,0,0.6); }
+  }
+
+  /* SCREEN 3 */
+  #s3 { background: #000; justify-content: flex-start; padding-top: 50px; overflow-y: auto; }
+  .heart-circle { width: 90px; height: 90px; border-radius: 50%; background: radial-gradient(circle, #2a0015, #0a0005); border: 1.5px solid rgba(255,77,143,0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 0 30px rgba(255,77,143,0.3); }
+  .big-heart { font-size: 40px; animation: pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1)}50%{transform:scale(1.15)} }
+  .jfy { font-family: 'Dancing Script', cursive; font-size: 36px; color: #fff; margin-bottom: 6px; }
+  .tap-hint { font-size: 14px; color: #aaa; margin-bottom: 24px; }
+  .cards-list { width: 100%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+  .reveal-card { background: rgba(60,10,35,0.8); border: 1px solid rgba(255,77,143,0.2); border-radius: 16px; padding: 18px 24px; text-align: center; cursor: pointer; transition: all 0.4s ease; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+  .reveal-card .heart-icon { font-size: 22px; color: rgba(255,77,143,0.6); }
+  .reveal-card.opened { background: rgba(80,10,45,0.9); border-color: rgba(255,77,143,0.5); }
+  .reveal-card .reveal-text { font-size: 15px; color: #fff; font-weight: 300; display: none; }
+  .reveal-card.opened .heart-icon { display: none; }
+  .reveal-card.opened .reveal-text { display: block; }
+  .btn-see { background: linear-gradient(135deg, #ff4d8f, #ff1a6e); border: none; border-radius: 50px; padding: 14px 36px; color: #fff; font-size: 16px; font-family: 'Poppins', sans-serif; cursor: pointer; box-shadow: 0 4px 20px rgba(255,77,143,0.4); transition: transform 0.2s; margin-bottom: 30px; }
+  .btn-see:hover { transform: scale(1.05); }
+
+  /* SCREEN 4 */
+  #s4 { background: #000; }
+  .note-title { font-family: 'Dancing Script', cursive; font-size: 36px; color: #fff; margin-bottom: 28px; }
+  .note-envelope { width: 100%; max-width: 340px; border-radius: 20px; overflow: hidden; cursor: pointer; position: relative; }
+  .note-front { background: linear-gradient(160deg, #ffb3cc, #ff85b3); padding: 36px 28px; text-align: center; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.5s; }
+  .note-front .ribbon { font-size: 60px; margin-bottom: 12px; }
+  .note-front .tap-open { font-size: 14px; color: rgba(255,255,255,0.8); }
+  .note-open { background: linear-gradient(160deg, #ffccd9, #ffb3cc); padding: 32px 28px; display: none; min-height: 300px; position: relative; }
+  .note-open .note-heart { font-size: 28px; text-align: center; display: block; margin-bottom: 20px; }
+  .note-open .note-body { font-size: 15px; color: #5a0020; line-height: 1.8; font-weight: 400; min-height: 140px; }
+  .note-open .cursor { display: inline-block; width: 2px; height: 16px; background: #ff4d8f; animation: blink 0.8s infinite; vertical-align: middle; }
+  @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
+  .note-corner-heart { position: absolute; font-size: 18px; opacity: 0.6; }
+  .btn-more { background: linear-gradient(135deg, #ff4d8f, #ff1a6e); border: none; border-radius: 50px; padding: 14px 32px; color: #fff; font-size: 15px; font-family: 'Poppins', sans-serif; cursor: pointer; margin-top: 20px; box-shadow: 0 4px 20px rgba(255,77,143,0.4); display: none; transition: transform 0.2s; }
+  .btn-more:hover { transform: scale(1.05); }
+
+  /* SCREEN 5 */
+  #s5 { background: radial-gradient(ellipse at bottom, #2a0a3a 0%, #000 70%); }
+  .bear-circle { width: 260px; height: 340px; border-radius: 24px; background: radial-gradient(circle, #1a0028, #0a0010); border: 2px solid rgba(255,77,143,0.4); display: flex; align-items: center; justify-content: center; margin-bottom: 32px; box-shadow: 0 0 40px rgba(255,77,143,0.3), 0 0 80px rgba(255,77,143,0.1); overflow: hidden; }
+  .bear { font-size: 90px; animation: spin 4s linear infinite; display: inline-block; }
+  @keyframes spin { from{transform:rotate(0deg)}to{transform:rotate(360deg)} }
+  .final-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 500; color: #ffb3cc; text-align: center; opacity: 0; animation: fadeUp 1s ease 0.5s forwards; line-height: 1.6; letter-spacing: 1px; text-shadow: 0 0 20px rgba(255,77,143,0.4); }
+  .hearts-float { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .fheart { position: absolute; font-size: 18px; animation: floatUp var(--dur) ease-in infinite; animation-delay: var(--del); bottom: -30px; opacity: 0; }
+  @keyframes floatUp { 0%{transform:translateY(0) scale(1);opacity:0.8}100%{transform:translateY(-100vh) scale(0.5);opacity:0} }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)} }
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1: Landing -->
+<div class="screen active" id="s1">
+  <div class="britney-title">
+    <span class="for-text">for</span>
+    <span class="britney-name">BRITNEY</span>
+  </div>
+  <div class="doll-circle">
+    <span class="doll">🧸</span>
+  </div>
+  <h1 class="hey">Hey Beautiful</h1>
+  <p class="cute-text">Do you even know how cute you are?</p>
+  <button class="btn-main" onclick="goTo(2)">Open My Heart 🤍</button>
+</div>
+
+<!-- SCREEN 2: Cuteness Meter -->
+<div class="screen" id="s2">
+  <div class="meter-card">
+    <p class="meter-title">Measuring your cuteness...</p>
+    <p class="meter-pct" id="pct">0%</p>
+    <div class="bar-track"><div class="bar-fill" id="bar"></div></div>
+    <p class="meter-sub" id="msub">Calculating cuteness...</p>
+    <p class="warning" id="mwarn"></p>
+  </div>
+</div>
+
+<!-- SCREEN 3: Reveal Cards -->
+<div class="screen" id="s3">
+  <div class="heart-circle"><span class="big-heart">💗</span></div>
+  <p class="jfy">Just for you</p>
+  <p class="tap-hint">Tap each one to reveal</p>
+  <div class="cards-list">
+    <div class="reveal-card" onclick="reveal(this)">
+      <span class="heart-icon">♡</span>
+      <span class="reveal-text">You look adorable</span>
+    </div>
+    <div class="reveal-card" onclick="reveal(this)">
+      <span class="heart-icon">♡</span>
+      <span class="reveal-text">You have the sweetest vibe</span>
+    </div>
+    <div class="reveal-card" onclick="reveal(this)">
+      <span class="heart-icon">♡</span>
+      <span class="reveal-text">You make things feel lighter</span>
+    </div>
+    <div class="reveal-card" onclick="reveal(this)">
+      <span class="heart-icon">♡</span>
+      <span class="reveal-text">You are naturally charming</span>
+    </div>
+    <div class="reveal-card" onclick="reveal(this)">
+      <span class="heart-icon">♡</span>
+      <span class="reveal-text">You make everything feel more special</span>
+    </div>
+  </div>
+  <button class="btn-see" onclick="goTo(4)">See More 💗</button>
+</div>
+
+<!-- SCREEN 4: Note -->
+<div class="screen" id="s4">
+  <p class="note-title">A little note for you</p>
+  <div class="note-envelope" id="envelope" onclick="openNote()">
+    <div class="note-front" id="noteFront">
+      <span class="ribbon">🎀</span>
+      <p class="tap-open">Tap to open</p>
+    </div>
+    <div class="note-open" id="noteOpen">
+      <span class="note-corner-heart" style="top:12px;left:16px">♡</span>
+      <span class="note-corner-heart" style="top:12px;right:16px">♡</span>
+      <span class="note-heart">💗</span>
+      <p class="note-body" id="noteBody"></p>
+    </div>
+  </div>
+  <button class="btn-more" id="btnMore" onclick="goTo(5)">One more thing →</button>
+</div>
+
+<!-- SCREEN 5: Final -->
+<div class="screen" id="s5">
+  <div class="hearts-float" id="heartsFloat"></div>
+  <div class="bear-circle">
+    <img src="https://i.ibb.co/pjnWzTj9/brits-photo.png" style="width:100%;height:100%;object-fit:cover;object-position:top;" />
+  </div>
+  <p class="final-text">"You'll always be special to me" 🤍</p>
+</div>
+
+<script>
+  const screens = [null, s1, s2, s3, s4, s5];
+  let meterDone = false;
+
+  function goTo(n) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    screens[n].classList.add('active');
+    if (n === 2 && !meterDone) runMeter();
+    if (n === 5) spawnHearts();
+  }
+
+  function runMeter() {
+    meterDone = true;
+    let val = 0;
+    const pct = document.getElementById('pct');
+    const bar = document.getElementById('bar');
+    const sub = document.getElementById('msub');
+    const warn = document.getElementById('mwarn');
+    const msgs = ['Calculating cuteness...', 'Almost there...', 'Results coming in...', 'Wow...'];
+    let mi = 0;
+
+    const iv = setInterval(() => {
+      val += Math.random() * 4 + 1;
+      if (val >= 100 && mi === 3) {
+        warn.textContent = '⚠️ WARNING: TOO CUTE TO HANDLE ⚠️';
+        warn.classList.add('show');
+        mi++;
+      }
+      if (val >= 120) {
+        val = 120;
+        clearInterval(iv);
+        setTimeout(() => goTo(3), 2500);
+      }
+      pct.textContent = Math.floor(val) + '%';
+      bar.style.width = Math.min(val, 100) + '%';
+      if (val > 30 && mi === 0) { sub.textContent = msgs[1]; mi++; }
+      if (val > 65 && mi === 1) { sub.textContent = msgs[2]; mi++; }
+      if (val > 95 && mi === 2) { sub.textContent = msgs[3]; mi++; }
+    }, 80);
+  }
+
+  function reveal(card) {
+    if (!card.classList.contains('opened')) {
+      card.classList.add('opened');
+    }
+  }
+
+  let noteOpened = false;
+  function openNote() {
+    if (noteOpened) return;
+    noteOpened = true;
+    document.getElementById('noteFront').style.display = 'none';
+    document.getElementById('noteOpen').style.display = 'block';
+    const text = "I just wanted to tell you something... you really are special in a way that's hard to explain.\nThere's a softness in the way you talk, a sweetness in the way you smile, and something genuine about you that just feels good to be around.\nYou don't try to be anything extra, you're just you, and that's what makes you so lovely.\nYou are my PRINCESS 👸\nYou're my Minion 🍌\nYou're my Batman 🦇\nNo... Batbrick 🧱🦇";
+    const el = document.getElementById('noteBody');
+    el.innerHTML = '<span class="cursor"></span>';
+    let i = 0;
+    const iv = setInterval(() => {
+      if (i < text.length) {
+        el.innerHTML = text.slice(0, ++i).replace(/\n/g, '<br>') + '<span class="cursor"></span>';
+      } else {
+        el.innerHTML = text.replace(/\n/g, '<br>');
+        clearInterval(iv);
+        document.getElementById('btnMore').style.display = 'inline-block';
+      }
+    }, 55);
+  }
+
+  function spawnHearts() {
+    const c = document.getElementById('heartsFloat');
+    c.innerHTML = '';
+    const emojis = ['💗','💕','🤍','💖','✨'];
+    for (let i = 0; i < 18; i++) {
+      const h = document.createElement('div');
+      h.className = 'fheart';
+      h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      h.style.left = Math.random() * 100 + '%';
+      h.style.setProperty('--dur', (Math.random() * 4 + 4) + 's');
+      h.style.setProperty('--del', (Math.random() * 5) + 's');
+      c.appendChild(h);
+    }
+  }
+</script>
+</body>
+</html>
